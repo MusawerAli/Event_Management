@@ -113,9 +113,9 @@ echo " Welcome $name ";
 
 	$sql="Select * From admin_table Where admin_username='$_SESSION[s_username]' AND admin_id='$_SESSION[s_id]' ";
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		echo  "
 		

@@ -8,11 +8,11 @@
 	
 	include "sams_event_db_connection.php";
 	$sql1="Select order_id From order_table WHERE u_id=$_SESSION[s_uid]";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	    $_SESSION['od_id']=$row['order_id'];
@@ -41,14 +41,14 @@
 {
    include "sams_event_db_connection.php";
 $sql1="Select * FROM hr_table where hr_id=$a";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		if(mysqli_num_rows($rs)>0)
 		
 		
 		{  
 		
 		    //$myarray=array();
-			while($row = mysql_fetch_array($rs))
+			while($row = mysqli_fetch_array($rs))
 	{
 		
 	     $arrid[]=$row['hr_id'];
@@ -74,7 +74,7 @@ for($x=0;$x<$arrlength;$x++)
 	
 	
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -108,11 +108,11 @@ foreach($my as $value){
 <?php
     include "sams_event_db_connection.php";
 	$sql1="Select * FROM hr_table h, hr_detail_table d WHERE h.hr_id=d.hr_id AND main_event_id=$_SESSION[event_name_id]";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		if(mysqli_num_rows($rs)>0)
 	{
 		$c=0;
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 		echo "<tr><td height=30><span class=text-form><strong>".$row['hr_name']. " </strong></span></td><td><input type=checkbox value=".$row['hr_id']." name=activate[]></td><tr>"; 

@@ -131,11 +131,11 @@ echo " Welcome $name ";
 				include "sams_event_db_connection.php";
 				$sql="Select * From user_registration_table u, order_table o WHERE u.u_id=o.u_id  ";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				 /*echo $myrows ;
 				 echo "<br>";*/
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=921 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -147,7 +147,7 @@ echo " Welcome $name ";
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>";
    $_SESSION['od_id']=$row['order_id'];
@@ -166,15 +166,15 @@ echo " Welcome $name ";
 	
 	  $msql="Select * From event_order u, ordered_arrangements o WHERE (u.order_id='$od_id' AND o.order_id='$od_id') ";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		  echo "<tr><td ><b>Date of Event</b></td><td>".$mrow['date_of_event']."</td></tr>";
 		 echo "<tr><td><b>Event Timings</b></td><td>". $mrow['event_timings']."</td></tr>";
         echo "<tr><td><b>Event Location</b></td><td>".$mrow['event_location']."</td></tr>";

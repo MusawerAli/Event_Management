@@ -145,7 +145,7 @@ echo " Welcome $name ";
 	
 	include "sams_event_db_connection.php";
 	$sql="DELETE From menu_details WHERE menu_detail_id=$delid";
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -160,13 +160,13 @@ echo " Welcome $name ";
                  include "sams_event_db_connection.php";
 				$sql="Select * From menu_details";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	
-	while($row = mysql_fetch_array($rs)){
+	while($row = mysqli_fetch_array($rs)){
 	
 	echo "<tr><td>".$row['package_item']."</td>
 	<td>Rs. &nbsp;".$row['menu_dtl_price']."</td>";

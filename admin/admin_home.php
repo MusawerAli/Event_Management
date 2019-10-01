@@ -1,7 +1,7 @@
 <?php
 	ob_start();
 	session_start();
-	
+	include "sams_event_db_connection.php";
 	
 	if (isset($_SESSION['s_username'])&& isset($_SESSION['s_uid'])) {
   
@@ -92,7 +92,7 @@ if (!isset($_SESSION['s_name'])){
                                                      <h3 class="p2" align="center">Login</h3>
                                                             
                                                       <div align="center">
-                                                                <form name="user_login" action="" method="post">
+                                                                <form name="user_login"  method="POST">
                             <table width="400" height="214" align="center" cellspacing="10">
                             <tr>
                             <td width="100" ><h5>UserName</h5></td>
@@ -100,42 +100,11 @@ if (!isset($_SESSION['s_name'])){
                             <tr><td><h5>Password</h5></td>
                             <td><input name="pass" type="password" size="40" maxlength="30"></td></tr>
                          <tr>   
-                          <td colspan="2" align="center"> <input type="image"  name="u_login" src="images/button (3).png"></td>
+                          <td colspan="2" align="center"> <input type="submit"  name="u_login" value="Login"></td>
                           <tr><td colspan="2"><br></td></tr>
                           </table>
           </form>
-                          <?php
-	if(isset($_REQUEST['u_login_x']))
-	{
-		 $u_name=$_REQUEST['u_name'];
-	    $u_pass=$_REQUEST['pass'];
-	    include "sams_event_db_connection.php";
-		$sql="Select * From admin_table Where admin_username='$u_name' AND admin_pass='$u_pass'";
-		
-		$rs = mysql_query($sql) or die(mysql_error());
-	if(mysql_num_rows($rs)>0)
-	{
-		
-	while($row = mysql_fetch_array($rs))
-	{
-		
-		$_SESSION['s_name']=$row['admin_name'];
-		$_SESSION['s_id']= $row['admin_id'];
-		$_SESSION['s_username']=$row['admin_username'];
-		$_SESSION['s_pass']= $row['admin_pass'];
-		
-		header("Location: myadmin.php");
-	
-	}
-	mysql_close($con);
-	}
-	else
-	{
-		echo"<font color=#663300 size=+4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invalid login</font>";
-	}
-	
-	}
-	?>
+                          
                                                           </div>
                                                         </div>
                                                     </article>
@@ -190,3 +159,36 @@ if (!isset($_SESSION['s_name'])){
     </footer>
 </body>
 </html>
+
+<?php
+	if(isset($_POST['u_login']))
+	{
+		 $u_name=$_REQUEST['u_name'];
+	    $u_pass=$_REQUEST['pass'];
+	    
+		$sql="Select * From admin_table Where admin_username='$u_name' AND admin_pass='$u_pass'";
+		
+		$rs = mysqli_query($con,$sql);
+	if($d= mysqli_num_rows($rs)>0)
+	{
+		
+	while($row = mysqli_fetch_array($rs))
+	{
+		
+		$_SESSION['s_name']=$row['admin_name'];
+		$_SESSION['s_id']= $row['admin_id'];
+		$_SESSION['s_username']=$row['admin_username'];
+		$_SESSION['s_pass']= $row['admin_pass'];
+		
+		header("Location: myadmin.php");
+	
+	}
+	mysqli_close($con);
+	}
+	else
+	{
+		echo"<font color=#663300 size=+4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Invalid login</font>";
+	}
+	
+	}
+	?>

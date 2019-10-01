@@ -190,11 +190,11 @@
 	   $u_pass=$_REQUEST['pass'];
 	    include "hoteldb_connection.php";
 		$sql="Select * From user_table Where User_name='$u_name' AND U_Password='$u_pass'";
-		$rs = mysql_query($sql) or die(mysql_error());
-	if(mysql_num_rows($rs)>0)
+		$rs = mysqli_query($con,$sql);
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 		$_SESSION['s_uname']=$row['User_name'];

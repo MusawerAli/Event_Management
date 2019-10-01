@@ -149,18 +149,18 @@ echo " Welcome $name ";
 	
 	
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
 		
 		
 		$sql1="Select * FROM menu_table where menu_package='$_SESSION[pack_name]' AND main_event_id=$_SESSION[event_name_id]";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		if(mysqli_num_rows($rs)>0)
 		
 		{
-			while($row = mysql_fetch_array($rs))
+			while($row = mysqli_fetch_array($rs))
 	{
 		
 	    $_SESSION['menu_packg_id']=$row['menu_packg_id'];
@@ -199,13 +199,13 @@ echo " Welcome $name ";
 		include "sams_event_db_connection.php";
 		$sql="Select * From events_table";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['main_event_id'] . ">" . $row['main_event_name'] . "</option>";

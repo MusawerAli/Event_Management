@@ -8,11 +8,11 @@
 	
 	include "sams_event_db_connection.php";
 	$sql1="Select order_id From order_table WHERE u_id=$_SESSION[s_uid]";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	    $_SESSION['od_id']=$row['order_id'];
@@ -139,11 +139,11 @@ echo " &nbsp; &nbsp; Welcome $name ";
 {
    include "sams_event_db_connection.php";
 $sql1="Select * FROM hr_table where hr_id=$a";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		if(mysqli_num_rows($rs)>0)
 		
 		{
-			while($row = mysql_fetch_array($rs))
+			while($row = mysqli_fetch_array($rs))
 	{
 		
 	     $arrid[]=$row['hr_id'];
@@ -166,7 +166,7 @@ $sql1="Select * FROM hr_table where hr_id=$a";
 	
 	
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -206,7 +206,7 @@ foreach($my as $value){
 	
 	
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -224,7 +224,7 @@ foreach($my as $value){
 		$msql = "INSERT INTO ordered_arrangements SET order_id='$_SESSION[od_id]' ,theme_id='$_SESSION[event_theme]', hr_packg_id=$_SESSION[hr_pid],   arr_packg_id='$_SESSION[arrangement_pack]', dec_packg_id='$_SESSION[deco_pack]'"; 
 	
 	
-	$mrs = mysql_query($msql) or die(mysql_error());
+	$mrs = mysqli_query($con,$msql);
 	
 	if($mrs == 1)
 	{
@@ -233,7 +233,7 @@ foreach($my as $value){
 	
 	}
 		
-	mysql_close($con);
+	mysqli_close($con);
 	
 	//	echo 	$_SESSION['deco_pack'];
 		
@@ -265,19 +265,19 @@ foreach($my as $value){
 		include "sams_event_db_connection.php";
 		$sql="Select * From event_type where main_event_id= $_SESSION[event_name_id]";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		//$_SESSION['$_aa']= $myrows;
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['event_id'] . ">" . $row['event_name'] . "</option>";
 
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 	  echo "</select>"; 
 	  
@@ -288,19 +288,19 @@ foreach($my as $value){
 		include "sams_event_db_connection.php";
 		$sql="Select * From event_themes";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		//$_SESSION['$_aa']= $myrows;
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['theme_id'] . ">" . $row['theme_name'] . "</option>";
 
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 	  echo "</select>"; 
 	  
@@ -309,12 +309,12 @@ foreach($my as $value){
   <?php
     include "sams_event_db_connection.php";
 	$sql1="Select * FROM hr_table h, hr_detail_table d WHERE h.hr_id=d.hr_id AND main_event_id=$_SESSION[event_name_id]";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-	$_SESSION['myrowsc']	=mysql_num_rows($rs);
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+	$_SESSION['myrowsc']	=mysqli_num_rows($rs);
+		if(mysqli_num_rows($rs)>0)
 	{
 		$c=0;
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 		echo "<tr><td height=30><span class=text-form><strong>".$row['hr_name']. " </strong></span></td><td width=200> <input type=checkbox value=".$row['hr_id']." name=activate[]>&nbsp; &nbsp; Rs. &nbsp;".$row['hr_price']."</td><tr>"; 
@@ -342,20 +342,20 @@ foreach($my as $value){
 		include "sams_event_db_connection.php";
 		$sql="Select * From arrangement_package where main_event_id= $_SESSION[event_name_id]";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		//$_SESSION['$_aa']= $myrows;
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['arr_packg_id'] . ">" . $row['arr_packg_name'] . "</option>";
 	
 
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 	  echo "</select>"; 
 	  
@@ -367,11 +367,11 @@ foreach($my as $value){
 			   include "sams_event_db_connection.php";
 				$sql="Select * From arrangement_package where arr_packg_id=1";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				 /*echo $myrows ;
 				 echo "<br>";*/
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=828 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -383,7 +383,7 @@ foreach($my as $value){
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>
     <th height=30 scope=row valign=top>".$row['arr_packg_name']."</th>";
@@ -397,16 +397,16 @@ foreach($my as $value){
 	  
 	  $msql="Select * From event_arrangements e , arrangement_packg_details d where arr_packg_id=$dec_id AND e.arrangement_id=d.arrangement_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				 /*echo $mrows;
 				 echo "<br>" ;	*/		
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		 echo "<tr><td width=228> </td>
 		 <td width=228 colspan=3 align=left>".$mrow['material_name']."</td>
     
@@ -419,7 +419,7 @@ foreach($my as $value){
 	 
 	}
 	
-	mysql_close($con);
+	mysqli_close($con);
 	
 	
 	
@@ -441,19 +441,19 @@ echo "<tr><td><br></td></tr></table>";
 		include "sams_event_db_connection.php";
 		$sql="Select * From decoration_packages";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['dec_packg_id'] . ">" . $row['dec_packg_name'] . "</option>";
 
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 	  echo "</select>"; 
 	  
@@ -464,10 +464,10 @@ echo "<tr><td><br></td></tr></table>";
 				include "sams_event_db_connection.php";
 				$sql="Select * From  decoration_packages where dec_packg_id=1";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=828 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -479,7 +479,7 @@ echo "<tr><td><br></td></tr></table>";
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>
     <th height=30 scope=row valign=top>".$row['dec_packg_name']."</th>";
@@ -490,15 +490,15 @@ echo "<tr><td><br></td></tr></table>";
 	  
 	  $msql="Select * From decoration_pckg_details d , decoration_details e where d.dec_packg_id=$dec_id AND d.dec_id=e.dec_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 						
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		 echo "<tr><td width=228> </td>
 		 <td width=228 colspan=3 align=left>".$mrow['dec_type_name']."</td>
     
@@ -511,7 +511,7 @@ echo "<tr><td><br></td></tr></table>";
 	 
 	}
 	
-	mysql_close($con);
+	mysqli_close($con);
 	
 	
 	

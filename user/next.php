@@ -8,11 +8,11 @@
 	
 	include "sams_event_db_connection.php";
 	$sql1="Select order_id From order_table WHERE u_id=$_SESSION[s_uid]";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	    $_SESSION['od_id']=$row['order_id'];

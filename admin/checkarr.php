@@ -20,7 +20,7 @@
 	$delid = $_REQUEST['delid'];
 	include "sams_event_db_connection.php";
 	$sql="Delete From arrangement_package WHERE arr_packg_id=$delid";
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs==1)
 	
@@ -29,7 +29,7 @@
 		
 	$sql = "DELETE FROM arrangement_packg_details WHERE arr_packg_id=$delid";
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{

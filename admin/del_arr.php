@@ -138,7 +138,7 @@ echo " Welcome $name ";
 	
 	include "sams_event_db_connection.php";
 	$sql="DELETE From event_arrangements WHERE arrangement_id=$delid";
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -157,14 +157,14 @@ $sql = "SELECT * FROM event_arrangements where arrangement_id='$editid'";
 	
 	
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
-		if(mysql_num_rows($rs)>0)
+		if(mysqli_num_rows($rs)>0)
 	{
 		
 	
 
-		while($row = mysql_fetch_array($rs))
+		while($row = mysqli_fetch_array($rs))
 		{
 			
 		 $name= $row['material_name'];
@@ -219,7 +219,7 @@ $sql = "SELECT * FROM event_arrangements where arrangement_id='$editid'";
 	
 	
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{

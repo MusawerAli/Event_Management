@@ -12,11 +12,11 @@
 	
 	include "sams_event_db_connection.php";
 	$sql1="Select order_id From order_table WHERE u_id=$_SESSION[s_uid]";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	    $_SESSION['od_id']=$row['order_id'];
@@ -138,7 +138,7 @@ echo " &nbsp; &nbsp; Welcome $name ";
 	 	
 	$sql = "INSERT INTO ordered_menu SET order_id='$_SESSION[od_id]',  menu_packg_id=' $_REQUEST[my_menu]', bev_packg_id=' $_REQUEST[beverages]'";
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -157,7 +157,7 @@ echo "<tr><td><h2>Record Inserted<h2></td></tr>";
 		
 		echo "<tr><td>Failed to insert!</td></tr>";
 	}
-	mysql_close($con);	
+	mysqli_close($con);	
 	//include "total_bill.php";
 	
 	}
@@ -168,19 +168,19 @@ echo "<tr><td><h2>Record Inserted<h2></td></tr>";
 													
 		$sql="Select * From decoration_packages where dec_packg_id='$_SESSION[deco_pack]' ";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
     $_SESSION['deco_pack_price']=$row['dec_packg_price']; 	
 
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 
 ?>
@@ -190,19 +190,19 @@ echo "<tr><td><h2>Record Inserted<h2></td></tr>";
 include "sams_event_db_connection.php";
 		$sql="Select * From arrangement_package where arr_packg_id= $_SESSION[arrangement_pack]";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
     $_SESSION['arr_pack_price']=$row['arr_packg_price']; 	
 
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 
 ?>
@@ -227,19 +227,19 @@ include "sams_event_db_connection.php";
 		include "sams_event_db_connection.php";
 		$sql="Select * From menu_table where main_event_id=$_SESSION[event_name_id]";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['menu_packg_id'] . ">" . $row['menu_package'] . "</option>";
   // $_SESSION['bb']=$row['menu_packg_id'];
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 	  echo "</select>"; 
 	  
@@ -252,29 +252,29 @@ include "sams_event_db_connection.php";
 			 include "sams_event_db_connection.php";
 		$sql="Select * From menu_table where main_event_id=$_SESSION[event_name_id]";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
 	for($t=1;$t<=1;$t++)
 	{	
 	
    $_SESSION['bb']=$row['menu_packg_id'];
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 			 
 			 
 				include "sams_event_db_connection.php";
 				$sql="Select * From menu_table where main_event_id=$_SESSION[event_name_id] AND menu_packg_id=$_SESSION[bb] ";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				 
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=821 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -286,7 +286,7 @@ include "sams_event_db_connection.php";
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>
     <th height=30 scope=row valign=top>".$row['menu_package']."</th>";
@@ -300,16 +300,16 @@ include "sams_event_db_connection.php";
 	  
 	  $msql="Select * From menu_details d , menu_packg_details m where menu_packg_id=$dec_id AND d.menu_detail_id=m.menu_detail_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				 /*echo $mrows;
 				 echo "<br>" ;	*/		
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		 echo "<tr><td width=228> </td>
 		 <td width=228 colspan=3 align=left>".$mrow['package_item']."</td>
     
@@ -322,7 +322,7 @@ include "sams_event_db_connection.php";
 	 
 	}
 	
-	mysql_close($con);
+	mysqli_close($con);
 	
 	
 	
@@ -340,19 +340,19 @@ echo "<tr><td><br><br></td></tr></table>";
 		include "sams_event_db_connection.php";
 		$sql="Select * From  beverage_packages where main_event_id=$_SESSION[event_name_id]";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		//$_SESSION['$_aa']= $myrows;
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['bev_packg_id'] . ">" . $row['bev_packg_name'] . "</option>";
 
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 	  echo "</select>"; 
 	  
@@ -362,29 +362,29 @@ echo "<tr><td><br><br></td></tr></table>";
      include "sams_event_db_connection.php";
 		$sql="Select * From beverage_packages where main_event_id=$_SESSION[event_name_id]";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
 	for($t=1;$t<=1;$t++)
 	{	
 	
    $_SESSION['aa']=$row['bev_packg_id'];
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
                 
 				
 				include "sams_event_db_connection.php";
 				$sql="Select * From beverage_packages where bev_packg_id=$_SESSION[aa] ";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				 
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=821 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -396,7 +396,7 @@ echo "<tr><td><br><br></td></tr></table>";
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>
     <th height=30 scope=row valign=top>".$row['bev_packg_name']."</th>";
@@ -410,16 +410,16 @@ echo "<tr><td><br><br></td></tr></table>";
 	  
 	  $msql="Select * From bev_packg_details b , beverages_table d where b.bev_packg_id=$dec_id AND b.beverage_id=d.beverage_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				 /*echo $mrows;
 				 echo "<br>" ;	*/		
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		 echo "<tr><td width=228> </td>
 		 <td width=228 colspan=3 align=left>".$mrow['beverage_name']."</td>
     
@@ -432,7 +432,7 @@ echo "<tr><td><br><br></td></tr></table>";
 	 
 	}
 	
-	mysql_close($con);
+	mysqli_close($con);
 	
 	
 	

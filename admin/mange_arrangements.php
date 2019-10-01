@@ -152,13 +152,13 @@ echo " Welcome $name ";
 		include "sams_event_db_connection.php";
 		$sql="Select * From events_table";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['main_event_id'] . ">" . $row['main_event_name'] . "</option>";

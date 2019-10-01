@@ -140,14 +140,14 @@ echo " Welcome $name ";
 	
 	include "sams_event_db_connection.php";
 	$sql="SELECT * From menu_details WHERE menu_detail_id=$editid";
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
-	$myrows = mysql_num_rows($rs);
+	$myrows = mysqli_num_rows($rs);
 				
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	
-	while($row = mysql_fetch_array($rs)){
+	while($row = mysqli_fetch_array($rs)){
 	
 	$p=$row['package_item'];
 	$r=$row['menu_dtl_price'];
@@ -169,7 +169,7 @@ echo " Welcome $name ";
 	
 	
 
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{

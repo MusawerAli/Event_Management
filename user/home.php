@@ -221,11 +221,11 @@ echo " &nbsp; &nbsp; Welcome $name ";
 	    include "sams_event_db_connection.php";
 		$sql="Select * From user_registration_table Where u_email='$u_name' AND u_Pass='$u_pass'";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-	if(mysql_num_rows($rs)>0)
+		$rs = mysqli_query($con,$sql);
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		//$_SESSION=array();
 		$_SESSION['s_uname']=$row['u_name'];
@@ -234,7 +234,7 @@ echo " &nbsp; &nbsp; Welcome $name ";
 		header("Location: myprofile.php");
 	
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 	else
 	{

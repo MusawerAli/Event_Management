@@ -143,9 +143,9 @@ echo " &nbsp; &nbsp; Welcome $name ";
 
 	$sql = "SELECT * FROM user_registration_table WHERE u_id='$s_id' ";
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		echo  "
 		
@@ -182,7 +182,7 @@ echo " &nbsp; &nbsp; Welcome $name ";
 		
 		}
 	
-	mysql_close($con);
+	mysqli_close($con);
 	
 ?> 
                                                     

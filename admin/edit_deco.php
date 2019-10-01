@@ -115,7 +115,7 @@ echo " Welcome $name ";
 														include "sams_event_db_connection.php";
 	
 	                     $sql = "DELETE FROM decoration_packages WHERE dec_packg_id='$delid'";
-						 $rs = mysql_query($sql) or die(mysql_error());
+						 $rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -124,7 +124,7 @@ echo " Welcome $name ";
 	                     include "sams_event_db_connection.php";
 	
 	                     $sql = "DELETE FROM decoration_pckg_details WHERE dec_packg_id='$delid'";
-						 $rs = mysql_query($sql) or die(mysql_error());
+						 $rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -141,11 +141,11 @@ echo " Welcome $name ";
 				include "sams_event_db_connection.php";
 				$sql="Select * From decoration_packages ";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				 /*echo $myrows ;
 				 echo "<br>";*/
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=800 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -158,7 +158,7 @@ echo " Welcome $name ";
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>
     <th height=30 scope=row valign=top >".$row['dec_packg_name']."</td>";
@@ -173,16 +173,16 @@ echo " Welcome $name ";
 	  
 	  $msql="Select * From decoration_pckg_details d , decoration_details e where d.dec_packg_id=$dec_id AND d.dec_id=e.dec_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				 /*echo $mrows;
 				 echo "<br>" ;	*/		
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		 echo "<tr><td width=228> </td>
 		 <td width=230 colspan=3 align=left bgcolor=#FFFFCC>&nbsp; &nbsp; &nbsp; ".$mrow['dec_type_name']."</td>
 		

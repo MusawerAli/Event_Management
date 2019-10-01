@@ -4,10 +4,10 @@ $ev=$_GET["ev"];
               include "sams_event_db_connection.php";
 				$sql="Select * From events_table where main_event_id='".$ev."'";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=828 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -19,7 +19,7 @@ $ev=$_GET["ev"];
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>
     <th height=30 scope=row valign=top>".$row['main_event_name']."</th></tr>";
@@ -29,15 +29,15 @@ $ev=$_GET["ev"];
 	  
 	  $msql="Select * From events_table e , event_type d where e.main_event_id=$dec_id AND e.main_event_id=d.main_event_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				 	
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		 echo "<tr><td width=288></td>
 		 <td width=228 colspan=3 align=left>".$mrow['event_name']."</td>
     
@@ -50,7 +50,7 @@ $ev=$_GET["ev"];
 	 
 	}
 	
-	mysql_close($con);
+	mysqli_close($con);
 	
 	
 	

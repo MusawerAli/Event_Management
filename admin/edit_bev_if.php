@@ -125,13 +125,13 @@ echo " Welcome $name ";
 		include "sams_event_db_connection.php";
 		$sql="Select * From events_table";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['main_event_id'] . ">" . $row['main_event_name'] . "</option>";
@@ -148,9 +148,9 @@ echo " Welcome $name ";
 	$editid = $_REQUEST['editid'];
 	include "sams_event_db_connection.php";
 	$sql="Select * From beverage_packages a, events_table t WHERE a.main_event_id= $_SESSION[event_name_id] AND a.bev_packg_id=$editid";
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
-	while($row=mysql_fetch_array($rs))
+	while($row=mysqli_fetch_array($rs))
 	{
 		
 		 $t_ename = $row['main_event_name'];
@@ -177,17 +177,17 @@ echo " Welcome $name ";
                include "sams_event_db_connection.php";
 	$msql="Select * From beverages_table e , bev_packg_details d where bev_packg_id=$editid AND e.beverage_id=d.beverage_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				
 				  		
 	
-		if(mysql_num_rows($mrs)>0)
+		if(mysqli_num_rows($mrs)>0)
 	{
 		
 	
 
-		while($mrow = mysql_fetch_array($mrs))
+		while($mrow = mysqli_fetch_array($mrs))
 		{
 			
 		 echo $mrow['beverage_name'];
@@ -211,12 +211,12 @@ echo " Welcome $name ";
 {
    include "sams_event_db_connection.php";
   $sql1="Select * FROM beverages_table where beverage_id=$a";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		//$_SESSION['myitems']=mysql_num_rows($rs);
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		//$_SESSION['myitems']=mysqli_num_rows($rs);
+		if(mysqli_num_rows($rs)>0)
 		
 		{ 
-			while($row = mysql_fetch_array($rs))
+			while($row = mysqli_fetch_array($rs))
 	{
 		
 	     $arrid[]=$row['beverage_id'];
@@ -234,7 +234,7 @@ echo " Welcome $name ";
   $_SESSION['myitems']= $arrlength;
   include "sams_event_db_connection.php";
 	$sql="DELETE From bev_packg_details WHERE bev_packg_id=$editid";
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1){
   for($x=0;$x<$arrlength;$x++)
@@ -245,7 +245,7 @@ echo " Welcome $name ";
 	
 	
 
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -279,7 +279,7 @@ include "sams_event_db_connection.php";
 	
 	
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -299,12 +299,12 @@ include "sams_event_db_connection.php";
   <?php
     include "sams_event_db_connection.php";
 	$sql1="Select * FROM beverages_table ";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-	$_SESSION['myrowsc']	=mysql_num_rows($rs);
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+	$_SESSION['myrowsc']	=mysqli_num_rows($rs);
+		if(mysqli_num_rows($rs)>0)
 	{
 		$c=0;
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 		echo "<tr><td height=45 width=300><span class=text-form><strong>".$row['beverage_name']. " </strong></span></td><td width=200> <input type=checkbox value=".$row['beverage_id']." name=activate[]>&nbsp; &nbsp; Rs. &nbsp;".$row['beverage_price']."</td><tr>"; 

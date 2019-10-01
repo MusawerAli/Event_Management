@@ -151,7 +151,7 @@ echo " &nbsp; &nbsp; Welcome $name ";
 	    include "sams_event_db_connection.php";
         $sql = "INSERT INTO order_table SET u_id='$_SESSION[s_uid]' ,main_event_id='$_eid', date_of_order='$dt' , time_of_order='$t'"; 
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -190,19 +190,19 @@ echo " &nbsp; &nbsp; Welcome $name ";
 		include "sams_event_db_connection.php";
 		$sql="Select * From events_table";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['main_event_id'] . ">" . $row['main_event_name'] . "</option>";
 
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 	  echo "</select>"; 
 	  
@@ -217,10 +217,10 @@ echo " &nbsp; &nbsp; Welcome $name ";
               include "sams_event_db_connection.php";
 				$sql="Select * From events_table where main_event_id=1";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=828 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -232,7 +232,7 @@ echo " &nbsp; &nbsp; Welcome $name ";
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>
  
@@ -245,15 +245,15 @@ echo " &nbsp; &nbsp; Welcome $name ";
 	  
 	  $msql="Select * From events_table e , event_type d where e.main_event_id=$dec_id AND e.main_event_id=d.main_event_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 					
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		 echo "<tr><td width=288></td>
 		 <td width=228 colspan=3 align=left>".$mrow['event_name']."</td>
     
@@ -266,7 +266,7 @@ echo " &nbsp; &nbsp; Welcome $name ";
 	 
 	}
 	
-	mysql_close($con);
+	mysqli_close($con);
 	
 	
 	

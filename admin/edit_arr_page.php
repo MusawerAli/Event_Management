@@ -125,13 +125,13 @@ echo " Welcome $name ";
 		include "sams_event_db_connection.php";
 		$sql="Select * From events_table";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['main_event_id'] . ">" . $row['main_event_name'] . "</option>";
@@ -149,9 +149,9 @@ echo " Welcome $name ";
 	$editid = $_REQUEST['editid'];
 	include "sams_event_db_connection.php";
 				$sql="Select * From arrangement_package a, events_table t WHERE a.main_event_id= $_SESSION[event_name_id] AND a.arr_packg_id=$editid";
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
-	while($row=mysql_fetch_array($rs))
+	while($row=mysqli_fetch_array($rs))
 	{
 		
 		 $t_ename = $row['main_event_name'];
@@ -178,17 +178,17 @@ echo " Welcome $name ";
 	include "sams_event_db_connection.php";
 	$msql="Select * From event_arrangements e , arrangement_packg_details d where arr_packg_id=$editid AND e.arrangement_id=d.arrangement_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				
 				  		
 	
-		if(mysql_num_rows($mrs)>0)
+		if(mysqli_num_rows($mrs)>0)
 	{
 		
 	
 
-		while($mrow = mysql_fetch_array($mrs))
+		while($mrow = mysqli_fetch_array($mrs))
 		{
 			
 		 echo $mrow['material_name'];
@@ -206,12 +206,12 @@ echo " Welcome $name ";
   <?php
     include "sams_event_db_connection.php";
 	$sql1="Select * FROM event_arrangements ";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-	$_SESSION['myrowsc']	=mysql_num_rows($rs);
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+	$_SESSION['myrowsc']	=mysqli_num_rows($rs);
+		if(mysqli_num_rows($rs)>0)
 	{
 		$c=0;
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 		echo "<tr><td height=35><span class=text-form><strong>".$row['material_name']. " </strong></span></td><td width=200> <input type=checkbox value=".$row['arrangement_id']." name=activate[]>&nbsp; &nbsp; Rs. &nbsp;".$row['material_price']."</td><tr>"; 
@@ -253,12 +253,12 @@ echo " Welcome $name ";
    include "sams_event_db_connection.php";
   $sql1="Select * FROM event_arrangements where arrangement_id=$a";
 
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		//$_SESSION['myitems']=mysql_num_rows($rs);
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		//$_SESSION['myitems']=mysqli_num_rows($rs);
+		if(mysqli_num_rows($rs)>0)
 		
 		{ 
-			while($row = mysql_fetch_array($rs))
+			while($row = mysqli_fetch_array($rs))
 	{
 		
 	     $arrid[]=$row['arrangement_id'];
@@ -273,7 +273,7 @@ echo " Welcome $name ";
 
 $sql = "DELETE FROM arrangement_packg_details WHERE arr_packg_id=$editid";
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -288,7 +288,7 @@ $sql = "DELETE FROM arrangement_packg_details WHERE arr_packg_id=$editid";
 	
 	
 
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -322,7 +322,7 @@ foreach($my as $value){
 	 	
 	$sql = "UPDATE arrangement_package SET main_event_id=$p_event , arr_packg_name='$p_name' ,arr_packg_price='$_SESSION[hr_rate]' ,arr_packg_items='$_SESSION[myitems]' WHERE arr_packg_id=$editid";
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{

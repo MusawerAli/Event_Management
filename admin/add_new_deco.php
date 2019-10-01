@@ -140,7 +140,7 @@ echo " Welcome $name ";
 	
 	
 
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -165,13 +165,13 @@ echo " Welcome $name ";
 		include "sams_event_db_connection.php";
 		$sql="Select * From event_decorations";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['event_dec_id'] . ">" . $row['event_dec_name'] . "</option>";

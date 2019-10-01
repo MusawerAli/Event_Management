@@ -139,14 +139,14 @@ echo " Welcome $name ";
 	
 	
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
-		if(mysql_num_rows($rs)>0)
+		if(mysqli_num_rows($rs)>0)
 	{
 		
 	
 
-		while($row = mysql_fetch_array($rs))
+		while($row = mysqli_fetch_array($rs))
 		{
 			
 		 echo "<tr><td>". $row['material_name']."</td>";

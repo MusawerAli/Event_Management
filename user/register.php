@@ -176,7 +176,7 @@ echo " &nbsp; &nbsp; Welcome $name ";
 	 	
 	$sql = "INSERT INTO user_registration_table SET u_name='$p_name',u_cnic='$p_cnic', u_country='$p_country', u_Pass='$p_pass', u_address='$p_add', u_contact='$p_contact', u_email='$p_email'";
 	
-	$rs = mysqli_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -186,7 +186,7 @@ echo " &nbsp; &nbsp; Welcome $name ";
 	
 		header('Location:login.php');
 	}
-	//mysql_close($con);	
+	//mysqli_close($con);	
 	}
 	   
    

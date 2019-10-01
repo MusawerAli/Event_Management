@@ -15,11 +15,11 @@
 				include "sams_event_db_connection.php";
 				$sql="Select * From arrangement_package where arr_packg_id=1";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				 /*echo $myrows ;
 				 echo "<br>";*/
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=828 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -31,7 +31,7 @@
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>
     <th height=30 scope=row valign=top>".$row['arr_packg_name']."</th>";
@@ -45,16 +45,16 @@
 	  
 	  $msql="Select * From event_arrangements e , arrangement_packg_details d where arr_packg_id=$dec_id AND e.arrangement_id=d.arrangement_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				 /*echo $mrows;
 				 echo "<br>" ;	*/		
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		 echo "<tr><td width=228> </td>
 		 <td width=228 colspan=3 align=left>".$mrow['material_name']."</td>
     
@@ -67,7 +67,7 @@
 	 
 	}
 	
-	mysql_close($con);
+	mysqli_close($con);
 	
 	
 	
@@ -85,11 +85,11 @@ echo "<tr><td><br></td></tr></table>";
 				include "sams_event_db_connection.php";
 				$sql="Select * From arrangement_package where arr_packg_id=$_id";	
 				
-				$rs = mysql_query($sql) or die(mysql_error());
-				$myrows = mysql_num_rows($rs);
+				$rs = mysqli_query($con,$sql);
+				$myrows = mysqli_num_rows($rs);
 				 /*echo $myrows ;
 				 echo "<br>";*/
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{	
 	echo
 	 "<table width=828 border=0 cellspacing=2 cellpadding=10 align=center>
@@ -101,7 +101,7 @@ echo "<tr><td><br></td></tr></table>";
 	 
 	 for ($i=0; $i<$myrows; $i++) 
 	{
-	$row = mysql_fetch_array($rs);
+	$row = mysqli_fetch_array($rs);
   echo "
   <tr>
     <th height=30 scope=row valign=top>".$row['arr_packg_name']."</th>";
@@ -115,16 +115,16 @@ echo "<tr><td><br></td></tr></table>";
 	  
 	  $msql="Select * From event_arrangements e , arrangement_packg_details d where arr_packg_id=$dec_id AND e.arrangement_id=d.arrangement_id";	
 					
-	$mrs = mysql_query($msql) or die(mysql_error());
-		$mrows = mysql_num_rows($mrs);
+	$mrs = mysqli_query($con,$msql);
+		$mrows = mysqli_num_rows($mrs);
 				 /*echo $mrows;
 				 echo "<br>" ;	*/		
-	if(mysql_num_rows($mrs)>0)
+	if(mysqli_num_rows($mrs)>0)
 	{
 		
 	for ($j=0; $j<$mrows; $j++){
 		
-		$mrow = mysql_fetch_array($mrs);
+		$mrow = mysqli_fetch_array($mrs);
 		 echo "<tr><td width=228> </td>
 		 <td width=228 colspan=3 align=left>".$mrow['material_name']."</td>
     
@@ -137,7 +137,7 @@ echo "<tr><td><br></td></tr></table>";
 	 
 	}
 	
-	mysql_close($con);
+	mysqli_close($con);
 	
 	
 	

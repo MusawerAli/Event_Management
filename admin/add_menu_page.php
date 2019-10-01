@@ -121,12 +121,12 @@ echo " Welcome $name ";
 {
    include "sams_event_db_connection.php";
   $sql1="Select * FROM menu_details where menu_detail_id=$a";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-		//$_SESSION['myitems']=mysql_num_rows($rs);
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+		//$_SESSION['myitems']=mysqli_num_rows($rs);
+		if(mysqli_num_rows($rs)>0)
 		
 		{ 
-			while($row = mysql_fetch_array($rs))
+			while($row = mysqli_fetch_array($rs))
 	{
 		
 	     $arrid[]=$row['menu_detail_id'];
@@ -150,7 +150,7 @@ echo " Welcome $name ";
 	
 	
 
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -184,7 +184,7 @@ include "sams_event_db_connection.php";
 	
 	
 	
-	$rs = mysql_query($sql) or die(mysql_error());
+	$rs = mysqli_query($con,$sql);
 	
 	if($rs == 1)
 	{
@@ -206,12 +206,12 @@ include "sams_event_db_connection.php";
   <?php
     include "sams_event_db_connection.php";
 	$sql1="Select * FROM menu_details ";
-    	$rs = mysql_query($sql1) or die(mysql_error());
-	$_SESSION['myrowsc']	=mysql_num_rows($rs);
-		if(mysql_num_rows($rs)>0)
+    	$rs = mysqli_query($con,$sql1);
+	$_SESSION['myrowsc']	=mysqli_num_rows($rs);
+		if(mysqli_num_rows($rs)>0)
 	{
 		$c=0;
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 		echo "<tr><td height=35 width=300><span class=text-form><strong>".$row['package_item']. " </strong></span></td><td width=200> <input type=checkbox value=".$row['menu_detail_id']." name=activate[]>&nbsp; &nbsp; Rs. &nbsp;".$row['menu_dtl_price']."</td><tr>"; 

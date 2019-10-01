@@ -36,19 +36,19 @@ xmlhttp.send();
 		include "sams_event_db_connection.php";
 		$sql="Select * From arrangement_package";
 		
-		$rs = mysql_query($sql) or die(mysql_error());
-		$myrows =mysql_num_rows($rs);
+		$rs = mysqli_query($con,$sql);
+		$myrows =mysqli_num_rows($rs);
 		//$_SESSION['$_aa']= $myrows;
-	if(mysql_num_rows($rs)>0)
+	if(mysqli_num_rows($rs)>0)
 	{
 		
-	while($row = mysql_fetch_array($rs))
+	while($row = mysqli_fetch_array($rs))
 	{
 		
 	echo "<option value=" . $row['arr_packg_id'] . ">" . $row['arr_packg_name'] . "</option>";
 
 	}
-	mysql_close($con);
+	mysqli_close($con);
 	}
 	  echo "</select>"; 
 	  
